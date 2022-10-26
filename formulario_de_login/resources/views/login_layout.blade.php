@@ -9,12 +9,25 @@
 </head>
 <body>
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<div class="logo"></div>
-<div class="login-block">
+    <div class="logo"></div>
+    <div class="login-block">
     <h1>Login</h1>
-    <input type="text" value="" placeholder="Usuário" id="username" />
-    <input type="password" value="" placeholder="senha" id="password" />
+    <form action="{{route('login_submit')}}" method="post">
+        @csrf
+    <input type="text" value="" placeholder="Usuário" name="usuario" />
+    <input type="password" value="" placeholder="senha" name="senha" />
     <button>Entrar</button>
+    </form>
+
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $mensagem)
+                <li>{{$mensagem}}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </div>
 </body>
 </html>
